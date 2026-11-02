@@ -71,3 +71,7 @@ A local image build and local rollback do not prove publication, a GHCR pull or 
 - Docker build and publish action: https://github.com/docker/build-push-action
 - Docker registry login: https://github.com/docker/login-action
 - Buildx setup: https://github.com/docker/setup-buildx-action
+
+## Verify the cart
+
+Add two notebooks and three pens. The server should return 22000 paise and the page should show a total of INR 220.00. Clear the cart and verify the total returns to zero.
