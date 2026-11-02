@@ -15,7 +15,7 @@ export function createServer() {
     try {
       const pathname = new URL(request.url, 'http://localhost').pathname;
       if (request.method === 'GET' && pathname === '/health') {
-        return json(response, 200, { status: 'ok', app: 'ShopEasy Lite', version: process.env.APP_VERSION || '1.0.0' });
+        return json(response, 200, { status: 'ok', app: 'ShopEasy Lite', version: process.env.APP_VERSION || '1.1.0', catalogSize: products.length });
       }
       if (request.method === 'GET' && pathname === '/api/products') {
         return json(response, 200, products);

@@ -24,7 +24,9 @@ test('HTTP routes return health, storefront and catalog', async (context) => {
   await once(server, 'listening');
   context.after(() => new Promise((resolve) => server.close(resolve)));
   const base = `http://127.0.0.1:${server.address().port}`;
-  assert.equal((await (await fetch(`${base}/health`)).json()).status, 'ok');
+  const health = await (await fetch(`${base}/health`)).json();
+  assert.equal(health.status, 'ok');
+  assert.equal(health.catalogSize, 3);
   assert.equal((await (await fetch(`${base}/api/products`)).json()).length, 3);
   assert.match(await (await fetch(base)).text(), /ShopEasy Lite/);
   assert.equal((await fetch(`${base}/missing`)).status, 404);
