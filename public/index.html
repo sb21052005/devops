@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ShopEasy Lite</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f3f6fa; color: #15263b; font-family: Arial, sans-serif; }
+    header { padding: 36px max(6vw, 24px); color: white; background: #183f62; }
+    header p { color: #d9e8f5; }
+    main { max-width: 1040px; padding: 28px 24px; margin: auto; }
+    h1 { margin: 0; font-size: 34px; }
+    h2 { margin-top: 0; }
+    #products { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 20px; }
+    article, aside { padding: 24px; background: white; border: 1px solid #dbe3ed; border-radius: 12px; }
+    article p { font-size: 24px; font-weight: bold; }
+    button { padding: 12px 20px; border: 0; border-radius: 7px; background: #126b56; color: white; cursor: pointer; font-size: 16px; }
+    button:hover { background: #0e5142; }
+    button:focus-visible { outline: 3px solid #e0a521; outline-offset: 3px; }
+    aside { margin-top: 24px; }
+    #total { font-size: 22px; font-weight: bold; }
+    footer { margin-top: 24px; color: #53677b; }
+  </style>
+</head>
+<body>
+  <header><h1>ShopEasy Lite</h1><p>A small web application for the DevOps laboratory</p></header>
+  <main>
+    <h2>Everyday essentials</h2>
+    <section id="products" aria-label="Products"></section>
+    <aside><h2>Your cart</h2><p id="cart" aria-live="polite">Your cart is empty.</p><p id="total">Total: ₹0.00</p><button id="clear">Clear cart</button></aside>
+    <footer id="status" aria-live="polite">Checking application health...</footer>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

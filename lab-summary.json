@@ -1,0 +1,49 @@
+{
+  "app": "ShopEasy Lite",
+  "localRuntime": "Node.js v24.22.1 on Windows",
+  "localValidation": {
+    "lint": { "status": "passed", "files": 6, "command": "node scripts/lint.mjs" },
+    "tests": { "status": "passed", "passed": 7, "failed": 0, "command": "node --test" },
+    "package": { "status": "passed", "command": "node scripts/package.mjs", "output": "dist/shopeasy-lite" }
+  },
+  "lab5": {
+    "aim": "Package an application in a custom Docker image and build and run it",
+    "requirements": "Docker Engine and the supplied ShopEasy Lite source",
+    "description": "The Dockerfile validates and packages the app in one stage, then copies the runtime files into a non-root Node.js 24 Alpine stage. Port 3000 serves the shop and /health reports its version.",
+    "commands": ["docker build --build-arg APP_VERSION=1.0.0 -t shopeasy-lite:1.0.0 .", "docker run -d --name shopeasy-v1 -p 127.0.0.1:3000:3000 shopeasy-lite:1.0.0", "docker inspect --format '{{.State.Health.Status}}' shopeasy-v1"],
+    "execution": "Docker execution is handled separately by the Docker lab runner"
+  },
+  "lab6": {
+    "aim": "Lint, test on two Node.js versions and package on every push and pull request, with required checks protecting main",
+    "requirements": "GitHub repository, Actions enabled and administration rights for branch protection",
+    "description": "The CI workflow has Node.js 22 and 24 matrix jobs, read-only contents permission, pinned actions and separate packaged artifacts. Branch protection must require both matrix checks and prevent bypasses.",
+    "observed": "Local Node.js 24 validation passed seven tests. Workflow files were prepared; this task did not execute hosted Actions or configure branch protection.",
+    "requiredStatusChecks": ["Node 22 lint test package", "Node 24 lint test package"],
+    "workflow": ".github/workflows/ci.yml"
+  },
+  "lab7": {
+    "aim": "Publish a versioned image to GHCR, pull and run that exact image and roll back to an earlier version",
+    "requirements": "Docker Engine, GitHub Actions package publishing permission, GHCR access and two published image digests",
+    "description": "The publication workflow builds and validates an image on main changes and semantic version tags, authenticates with GITHUB_TOKEN and records a digest reference for exact deployment and rollback.",
+    "observed": "The release workflow and digest-based deployment commands were prepared. This task did not publish to GHCR or perform a registry pull.",
+    "workflow": ".github/workflows/publish.yml"
+  },
+  "verifiedActionPins": {
+    "actions/checkout@v7.0.1": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "actions/setup-node@v7.1.0": "949feb2413d6458794dcd2491c4babbbce0c15c1",
+    "actions/upload-artifact@v7.0.2": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+    "docker/setup-buildx-action@v4.4.1": "f87e5991a6d7451dcb8d9637bfbc97413f497069",
+    "docker/login-action@v4.7.0": "81c6f93d4bc991e510b342a00b419b3bb4efc5c6",
+    "docker/build-push-action@v7.4.0": "c3c9e263c25d99ce0380d002d59b67737d91b0dc"
+  },
+  "references": [
+    "https://github.com/actions/setup-node",
+    "https://github.com/actions/upload-artifact",
+    "https://docs.github.com/en/actions/tutorials/publish-packages/publish-docker-images",
+    "https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions",
+    "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches",
+    "https://github.com/docker/build-push-action",
+    "https://github.com/docker/login-action",
+    "https://github.com/docker/setup-buildx-action"
+  ]
+}

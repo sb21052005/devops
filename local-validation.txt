@@ -1,0 +1,30 @@
+ShopEasy Lite local validation
+Executed with the bundled Windows Node runtime on 2 November 2026
+Working directory: work/shopeasy-lite
+
+> node --version
+v24.22.1
+
+> node scripts/lint.mjs
+Lint passed: 6 JavaScript files; syntax, spaces and final newlines checked.
+
+> node --test
+PASS catalog contains three products with positive integer prices
+PASS empty cart has zero total
+PASS cart computes exact totals without floating point rounding
+PASS unknown product and invalid quantities are rejected
+PASS non-array cart is rejected
+PASS HTTP routes return health, storefront and catalog
+PASS HTTP cart endpoint accepts valid input and rejects malformed data
+tests 7
+pass 7
+fail 0
+cancelled 0
+skipped 0
+todo 0
+
+> node scripts/package.mjs
+Packaged shopeasy-lite 1.0.0 into dist/shopeasy-lite
+
+The above is a normalized transcript of actual local command results.
+Hosted GitHub Actions, branch protection and GHCR publication were not executed by this preparation task.

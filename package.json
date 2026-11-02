@@ -1,0 +1,14 @@
+{
+  "name": "shopeasy-lite",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A dependency-free web shop for Git, Docker and CI laboratory exercises",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "lint": "node scripts/lint.mjs",
+    "test": "node --test",
+    "package": "node scripts/package.mjs"
+  }
+}
