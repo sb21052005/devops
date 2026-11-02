@@ -75,3 +75,7 @@ A local image build and local rollback do not prove publication, a GHCR pull or 
 ## Verify the cart
 
 Add two notebooks and three pens. The server should return 22000 paise and the page should show a total of INR 220.00. Clear the cart and verify the total returns to zero.
+
+## Release 1.1.0
+
+The health endpoint now reports catalogSize so a deployment can confirm that all three products are available. The HTTP regression test checks this value. Both Node.js matrix jobs must pass before merging.

@@ -10,7 +10,7 @@ test('catalog contains three products with positive integer prices', () => {
 });
 test('empty cart has zero total', () => assert.equal(calculateTotal([]), 0));
 test('cart computes exact totals without floating point rounding', () => {
-  assert.equal(calculateTotal([{ id: 'notebook', quantity: 2 }, { id: 'pen', quantity: 3 }]), 1);
+  assert.equal(calculateTotal([{ id: 'notebook', quantity: 2 }, { id: 'pen', quantity: 3 }]), 22000);
 });
 test('unknown product and invalid quantities are rejected', () => {
   for (const item of [{ id: 'missing', quantity: 1 }, { id: 'pen', quantity: -1 }, { id: 'pen', quantity: 1.5 }, { id: 'pen', quantity: 100 }]) {
@@ -24,7 +24,9 @@ test('HTTP routes return health, storefront and catalog', async (context) => {
   await once(server, 'listening');
   context.after(() => new Promise((resolve) => server.close(resolve)));
   const base = `http://127.0.0.1:${server.address().port}`;
-  assert.equal((await (await fetch(`${base}/health`)).json()).status, 'ok');
+  const health = await (await fetch(`${base}/health`)).json();
+  assert.equal(health.status, 'ok');
+  assert.equal(health.catalogSize, 3);
   assert.equal((await (await fetch(`${base}/api/products`)).json()).length, 3);
   assert.match(await (await fetch(base)).text(), /ShopEasy Lite/);
   assert.equal((await fetch(`${base}/missing`)).status, 404);
