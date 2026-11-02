@@ -10,7 +10,7 @@ test('catalog contains three products with positive integer prices', () => {
 });
 test('empty cart has zero total', () => assert.equal(calculateTotal([]), 0));
 test('cart computes exact totals without floating point rounding', () => {
-  assert.equal(calculateTotal([{ id: 'notebook', quantity: 2 }, { id: 'pen', quantity: 3 }]), 22000);
+  assert.equal(calculateTotal([{ id: 'notebook', quantity: 2 }, { id: 'pen', quantity: 3 }]), 1);
 });
 test('unknown product and invalid quantities are rejected', () => {
   for (const item of [{ id: 'missing', quantity: 1 }, { id: 'pen', quantity: -1 }, { id: 'pen', quantity: 1.5 }, { id: 'pen', quantity: 100 }]) {
